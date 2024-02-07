@@ -1,0 +1,20 @@
+# Ignore Node modules
+node_modules/
+
+# Ignore .env files
+.env
+
+# Ignore build artifacts and dependency directories
+dist/
+build/
+bower_components/
+jspm_packages/
+
+# Ignore logs and debugging files
+logs/
+*.log
+npm-debug.log*
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
