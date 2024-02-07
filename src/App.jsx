@@ -1,28 +1,28 @@
 import { useState } from "react";
 import { WeatherDetails } from "./components/WeatherDetails";
-import { fetchWeatherData } from "./api/weatherAppApi";
-import { fetchWeatherForecast } from "./api/weatherForecastApi";
+import { fetchWeatherData } from "./api/get-current-weather";
+import { fetchWeatherForecast } from "./api/get-weather-forecast";
 import { WeatherForecast } from "./components/WeatherForecast";
 import "./App.css";
 
 const App = () => {
   const [city, setCity] = useState("");
-  // const [error, setError] = useState("");
   const [data, setData] = useState([]);
   const [forecastData, setForecastData] = useState([]);
 
   //----------------------------USING ASYNC/AWAIT-----------------------------//
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
     if (city) {
-      fetchWeatherData(city).then((data) => setData(data));
-      fetchWeatherForecast(city).then((data) => setForecastData(data));
+      const weatherData = await fetchWeatherData(city);
+      setData(weatherData);
+      const fetchdata = await fetchWeatherForecast(city);
+      setForecastData(fetchdata);
       setCity("");
     } else {
       alert("Please Enter City Name");
     }
   };
-
   //---------------------USING PROMISES-------------------------//
 
   // const handleSearch = async(e) => {
@@ -67,7 +67,6 @@ const App = () => {
           />
           <button className="search-btn">Search</button>
         </form>
-        {/* {error && <div className="error">{error}</div>} */}
         {data && <WeatherDetails weather={data} />}
       </div>
       {forecastData && <WeatherForecast data={forecastData} />}

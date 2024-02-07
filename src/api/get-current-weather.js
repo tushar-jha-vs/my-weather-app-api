@@ -1,3 +1,4 @@
+import { checkResponse } from "../utils/index";
 
 //----------------------------USING ASYNC/AWAIT-----------------------------//
 export const fetchWeatherData = async (city) => {
@@ -7,9 +8,10 @@ export const fetchWeatherData = async (city) => {
         import.meta.env.VITE_API_KEY
       }`
     );
+    checkResponse(result);
     return await result.json();
   } catch (err) {
-    console.log(err);
+    alert(err.message);
   }
 };
 

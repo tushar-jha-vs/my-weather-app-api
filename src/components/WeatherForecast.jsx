@@ -4,7 +4,7 @@ export const WeatherForecast = ({ data }) => {
   const imgSrc = "https://openweathermap.org/img/wn";
   return (
     <div className="weather-container">
-      {data.map((item, index) => (
+      { data && data.map((item, index) => (
         <div className="weather-item" key={index}>
           <img
             src={`${imgSrc}/${item.weatherIcon.slice(0, -1) + "d"}@4x.png`}
